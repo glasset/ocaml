@@ -1,6 +1,13 @@
-let ackermann x y =
-    if x < 0 || y < 0 then
+let rec ackermann m n =
+    if m < 0 || n < 0 then
         (-1)
+    else if m = 0 then
+        (n + 1)
+    else if m > 0 && n = 0 then
+        ackermann (m - 1) 1
+    else
+        ackermann (m - 1) (ackermann m (n -1))
+
 
 let main () =
     print_endline (string_of_int (ackermann (-1) 7));
