@@ -7,6 +7,9 @@
 *.cmx
 *.cmxs
 *.cmxa
+*.byt
+*.opt
+
 a.out
 
 # ocamlbuild working directory
@@ -19,3 +22,5 @@ _build/
 # oasis generated files
 setup.data
 setup.log
+
+.depend
