@@ -1,0 +1,6 @@
+cipher.cmo :
+cipher.cmx :
+uncipher.cmo : cipher.cmo
+uncipher.cmx : cipher.cmx
+test.cmo : uncipher.cmo cipher.cmo
+test.cmx : uncipher.cmx cipher.cmx
