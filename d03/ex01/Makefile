@@ -6,13 +6,13 @@
 #*   By: glasset <glasset@student.42.fr>            +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/10/07 09:53:01 by glasset           #+#    #+#             *#
-#*   Updated: 2016/10/07 13:08:27 by glasset          ###   ########.fr       *#
+#*   Updated: 2016/10/07 13:05:31 by glasset          ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
-NAME = ft_graphics
+NAME = gardening
 
-SOURCES = ft_graphics.ml
+SOURCES = gardening.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt

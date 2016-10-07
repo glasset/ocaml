@@ -37,7 +37,7 @@ let draw_tree_node  node =
 
     | Nil ->
                     draw_sq x y size;
-					draw_string x y "";
+					draw_string x y "Nil";
 	in draw_tree node base_x base_y
 
 
@@ -50,16 +50,8 @@ let main () =
     Graphics.open_graph " 800x600";
     Graphics.set_window_title "ft_graphics";
     draw_square 400 300 30;
-    draw_tree_node (Node 
-		("first",
-			Node("tree",
-					Nil,
-					Node("node",
-							Nil,
-							Node("=)", Nil, Nil)
-					)
-			),
-		Nil));
+    draw_tree_node (Node
+		("first", Nil, Nil));
     Graphics.read_key()
 
 

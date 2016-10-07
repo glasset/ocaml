@@ -6,20 +6,21 @@
 #*   By: glasset <glasset@student.42.fr>            +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/10/07 09:53:01 by glasset           #+#    #+#             *#
-#*   Updated: 2016/10/07 13:08:27 by glasset          ###   ########.fr       *#
+#*   Updated: 2016/10/07 14:03:25 by glasset          ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
-NAME = ft_graphics
+NAME = ft_crypt
 
-SOURCES = ft_graphics.ml
+SOURCES = cipher.ml \
+		  uncipher.ml \
+		  test.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
 CAMLDEP = ocamldep
 
-LIBS = $(WITHGRAPHICS)
-WITHGRAPHICS = graphics.cma -cclib -lGraphics
+LIBS = 
 
 all: depend $(NAME)
 
