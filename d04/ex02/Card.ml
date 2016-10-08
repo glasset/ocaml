@@ -142,16 +142,13 @@ let min a b =
 	let x = Value.toInt a.value in
 	let y = Value.toInt b.value in
 	if x > y then
-		a
-	else
 		b
+	else
+		a
 
-let best lst =
-	let rec deter lst win =  match lst with
-		| hd::tl -> deter tl (max win hd)
+let best lst = match lst with
+		| hd::tl -> List.fold_left max hd tl
 		| [] -> invalid_arg "can't find best, list is empty"
-	in deter lst (newCard Value.T2 Color.Spade)
-(* List.fold_left max (newCard Color.t.Spade Value.t.T2) lst *)
 
 let isOf card col = card.color = col
 
