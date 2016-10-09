@@ -12,6 +12,12 @@
 
 a.out
 
+# OCamlMakefile:
+*.top
+._d
+._bcdi
+._ncdi
+
 # ocamlbuild working directory
 _build/
 
