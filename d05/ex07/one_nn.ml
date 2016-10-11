@@ -1,4 +1,4 @@
-type data = (float array * string)
+type radar = (float array * string)
 
 let extract_tuple line =
 	let rec loop lst i =
@@ -39,21 +39,55 @@ type res = (string * int)
 
 (* Test *)
 let isEgual (a, b) s1 = if s1 = b then true else false
-let check book estimate =
-    if (isEgual (List.nth book (List.length book - 1) ) estimate) then
-        print_string "T"
+let get (a, b) = b
+
+let check book (a, b) =
+	let real = (List.nth book (List.length book - 1) ) in
+    if (isEgual real a) then
+        Printf.printf "[t:%s] "  a
     else
-        print_string "F"
+        Printf.printf "{f:%s,%s} " (get real) a
 (* end *)
-(* TODO List.sort sur (a, B) + nth sur les N first + avg by char *)
+
+let sort (a, b) (c, d) =
+    if b = d then
+        0
+    else if b > d then
+        1
+    else
+        (-1)
+
+let rec append (a, b) res =
+    try
+        (List.remove_assoc a res) @ [(a, (List.assoc a res) + 1)]
+    with
+        | Not_found -> res @ [(a, 1)]
+
+let take n l =
+  let rec sub_list n accu l =
+    match l with
+    | [] -> accu
+    | hd :: tl ->
+      if n = 0 then accu
+      else sub_list (n - 1) (accu @ [hd]) tl
+  in sub_list n [] l
+
+
+let print_tuple (a,b) =
+	Printf.printf "(a:%d, b:%s)" (Array.length a) b
+
 let predicte res neighbors =
-    check neighbors "g";
+    let result = take 5 (List.rev (List.sort sort res)) in
+    let rec loop lst res = match lst with
+        | hd::tl -> loop tl (append hd res)
+        | [] -> res
+    in check neighbors (List.nth (List.rev (List.sort sort (loop result []))) 0);
     neighbors
 
 let estimate_value neighbors (a, b) =
     let rec loop lst res = match lst with
         | (c, d)::tl -> loop tl res @ [(d, eu_dist a c)]
-        | [] -> []
+        | [] -> [("", 0.)]
     in predicte (loop neighbors [] ) (neighbors @ [(a, b)])
 
 
