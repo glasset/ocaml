@@ -2,8 +2,8 @@ type data = (float array * string)
 
 let extract_tuple line =
 	let rec loop lst i =
-	if (i + 1) >= String.length line then begin
-		[String.sub line i 1] @ lst end
+	if i >= (String.rindex_from line (String.length line - 1) ',') then begin
+		[String.sub line i ((String.length line) - i)] @ lst end
 	else
 		begin
 		let sep = ((String.index_from line i ',') - i) in
