@@ -74,10 +74,10 @@ let take n l =
 
 
 let print_tuple (a,b) =
-	Printf.printf "(a:%d, b:%s)" (Array.length a) b
+	Printf.printf "(a:%s, b:%f)" a b
 
 let predicte res neighbors =
-    let result = take 5 (List.rev (List.sort sort res)) in
+    let result = take 1 (List.sort sort res) in
     let rec loop lst res = match lst with
         | hd::tl -> loop tl (append hd res)
         | [] -> res
@@ -87,7 +87,7 @@ let predicte res neighbors =
 let estimate_value neighbors (a, b) =
     let rec loop lst res = match lst with
         | (c, d)::tl -> loop tl res @ [(d, eu_dist a c)]
-        | [] -> [("", 0.)]
+        | [] -> [("?", 100.)]
     in predicte (loop neighbors [] ) (neighbors @ [(a, b)])
 
 
