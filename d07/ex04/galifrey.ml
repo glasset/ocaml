@@ -39,7 +39,7 @@ class galifrey dalek doctor people =
                             print_endline "doctor run away";
                         loop (self#removeDeadDalek dalek) (self#removeDeadPeople people) (List.tl doctor)
                     | 1 when List.length doctor > 0 && List.length dalek > 0 ->
-                        let hit = Random.int 151 in
+                        let hit = Random.int 181 in
                         let cur_dal = (List.hd dalek) in
                             if cur_dal#get_shield then
                                 begin
@@ -59,7 +59,9 @@ class galifrey dalek doctor people =
                             (List.hd dalek)#exterminate (List.hd people);
                         loop (self#removeDeadDalek dalek) (self#removeDeadPeople people) doctor
                     | _ ->
-                    if (List.length doctor = 0 || List.length dalek = 0) && List.length people = 0 then
+                    if ((List.length doctor = 0 || List.length dalek = 0) &&
+                    List.length people = 0) || (List.length doctor = 0 &&
+                    List.length dalek = 0) then
                         print_endline "thanks for watching, don't forget to subscribe"
                     else if List.length doctor <> 0 then
                         loop (self#removeDeadDalek dalek) (self#removeDeadPeople people) (List.tl doctor)

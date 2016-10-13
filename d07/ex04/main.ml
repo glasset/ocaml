@@ -12,9 +12,9 @@ let rec dalek i lst =
     else dalek (i - 1) (lst @ [new Dalek.dalek])
 
 let main () =
-    let army1 = new Army.army  (ppl 7 []) in
+    let army1 = new Army.army  (ppl 10 []) in
     let army2 = new Army.army  (doc 4 []) in
-    let army3 = new Army.army  (dalek 3 []) in
+    let army3 = new Army.army  (dalek 8 []) in
     let galifrey = new Galifrey.galifrey army3#get_army army2#get_army army1#get_army in
         galifrey#do_time_war
 
