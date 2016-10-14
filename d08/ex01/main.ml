@@ -1,0 +1,10 @@
+let () =
+    print_endline (new Molecule.trinitrotoluene)#to_string;
+    print_endline (new Molecule.water)#to_string;
+    print_endline (new Molecule.carbon_dioxyde)#to_string;
+    print_endline (new Molecule.nitric_oxide)#to_string;
+    print_endline (new Molecule.nitrogen_monohydride)#to_string;
+    print_endline (new Molecule.pentynylidyne)#to_string;
+    print_endline (new Molecule.methane)#to_string;
+    print_endline (new Molecule.octane)#to_string;
+    print_endline (new Molecule.ethane)#to_string
