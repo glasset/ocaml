@@ -29,3 +29,5 @@ _build/
 setup.data
 setup.log
 
+# osx
+.DS_Store
