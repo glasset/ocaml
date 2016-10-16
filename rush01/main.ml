@@ -1,4 +1,4 @@
-(* TODO save state player in file *)
+let init = GtkMain.Main.init ()
 
 let player = new Player.player (* init player *)
 
@@ -19,8 +19,7 @@ let btnPck =  GPack.button_box `HORIZONTAL
 
 let genBtn =
         let rec init btnList = match btnList with
-            | hd::tl -> print_endline (hd ^ " init");
-            let btn  = GButton.button ~label:hd ~packing:btnPck#add () in
+            | hd::tl -> let btn  = GButton.button ~label:hd ~packing:btnPck#add () in
             let f () = match hd with
                         | "EAT" -> player#eat
                         | "THUNDER" -> player#thunder
@@ -32,7 +31,6 @@ let genBtn =
             | [] -> ()
         in init btn
 
-(* player image TODO *)
 let getFilename x = "sprites/" ^ ( string_of_int x ) ^ ".png"
 let getPixbuf x = GdkPixbuf.from_file (getFilename x)
 
@@ -57,34 +55,62 @@ let bar =
 let updateBar () =
     let rec loop progr stats= match progr, stats with
         | hd::tl , (name, value)::tl2 ->
-                hd#set_text name;
+          hd#set_text (name^" "^(string_of_int (int_of_float value)));
                 hd#set_fraction (value /. 100.); (* convert % *)
                 loop tl tl2
         | _ , _ -> ()
     in loop bar player#getStats
 
+
 (* game over *)
+let dialog () =
+  let dlg = GWindow.message_dialog
+    ~message:"<b><big>GAME OVER</big>\n\n\
+              Retry ?</b>\n"
+    ~parent:window
+    ~destroy_with_parent:true
+    ~use_markup:true
+    ~message_type:`QUESTION
+    ~position:`CENTER_ON_PARENT
+    ~buttons:GWindow.Buttons.yes_no () in
+  let res = dlg#run () = `NO in
+  dlg#destroy ();
+  res
+
 let updateGameOver () =
     if player#isAlive = false then
         begin
-            (* TODO implem game over here *)
             print_endline "u lose, u can't win!!";
-            window#destroy ()
+            if (dialog ()) = false
+                then player#regen
+            else
+                begin
+                    player#regen;
+                    player#save;
+                    window#destroy ()
+                end
         end
+
+(* remove one health every second *)
+let time = ref (Unix.time ())
+let playerUpdate () =
+    if (Unix.time () -. !time) >= 1.
+    then begin player#oneHit;time := Unix.time () end
+
 
 (* main update *)
 let update () =
-    print_endline "update";
+    playerUpdate ();
     updateBar ();
     updateImage ();
     updateGameOver ();
     true
 
 let destroy () =
+    player#save;
     GMain.Main.quit ()
 
 let main () =
-      ignore(GtkMain.Main.init ());
       ignore(GMain.Timeout.add ~ms:420 ~callback:(update));
       ignore(window#connect#destroy ~callback:destroy);
       window#show ();

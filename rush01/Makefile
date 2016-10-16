@@ -13,5 +13,6 @@
 RESULT = rush01
 SOURCES = player.ml main.ml
 PACKS = lablgtk2
+LIBS = unix
 OCAMLMAKEFILE = OCamlMakefile
 include $(OCAMLMAKEFILE)
